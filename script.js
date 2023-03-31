@@ -12,8 +12,9 @@ var charVariables = {
 function generatePassword() {
   var password = "";
   var passwordLength = prompt("How many characters would you like your password to be? (8-128)");
-  if (passwordLength < 8 || passwordLength > 128) {
+  if (passwordLength < 8 || passwordLength > 128 ) {
     alert("Password must be between 8 and 128 characters");
+    location.reload();
     return;
   }
   var lowercase = confirm("Would you like to include lowercase letters?");
@@ -22,6 +23,7 @@ function generatePassword() {
   var specialCharacters = confirm("Would you like to include special characters?");
   if (!lowercase && !uppercase && !numeric && !specialCharacters) {
     alert("You must select at least one character type");
+    location.reload();
     return;
   }
   
@@ -50,9 +52,16 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
-  alert('Congratulations! Password Successfully Generated! \n' + "Password: " + password + '\n');
+  if(password != null) alert('Congratulations! Password Successfully Generated! \n' + "Password: " + password + '\n');
 
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+var clipped = document.querySelector("#password");
+
+// clipped.addEventListener("click",alert("Password copied to clipboard!"));
+// clipped.addEventListener("click"), function() {
+//   navigator.clipboard.writeText(clipped.value);
+//   alert("Password copied to clipboard!");
+// }
